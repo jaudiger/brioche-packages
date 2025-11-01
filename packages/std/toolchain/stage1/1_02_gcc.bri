@@ -30,11 +30,11 @@ export default std.memo(async (): Promise<std.Recipe<std.Directory>> => {
 
   source = bootstrapRun({
     script: std.indoc`
-      cd "$BRIOCHE_OUTPUT"
       sed -e '/m64=/s/lib64/lib/' -i gcc/config/i386/t-linux64
       sed -e '/mabi.lp64=/s/lib64/lib/' -i gcc/config/aarch64/t-aarch64-linux
     `,
     outputScaffold: source,
+    currentDir: std.outputPath,
   });
 
   const stage1 = binutils();

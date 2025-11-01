@@ -11,10 +11,10 @@ export default std.memo(async (): Promise<std.Recipe<std.Directory>> => {
 
   source = bootstrapRun({
     script: std.indoc`
-      cd "$BRIOCHE_OUTPUT"
       sed '6009s/$add_dir//' -i ltmain.sh
     `,
     outputScaffold: source,
+    currentDir: std.outputPath,
   });
 
   return bootstrapRun({

@@ -17,13 +17,13 @@ export default std.memo((): std.Recipe<std.Directory> => {
   );
   source = bootstrapRun({
     script: std.indoc`
-      cd "$BRIOCHE_OUTPUT"
       patch -Np1 -i "$sourcePatch"
     `,
     env: {
       sourcePatch,
     },
     outputScaffold: source,
+    currentDir: std.outputPath,
   });
 
   const briochePacked = runtimeUtils().get("bin/brioche-packed-exec");
